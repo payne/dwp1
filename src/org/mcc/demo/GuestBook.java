@@ -37,7 +37,6 @@ public class GuestBook extends HttpServlet {
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
 		this.entries = Collections.synchronizedList(new ArrayList<String>());
 		String fileName = config.getInitParameter("fileName");
 		LineNumberReader in;
@@ -49,11 +48,9 @@ public class GuestBook extends HttpServlet {
 			}
 			in.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace(); // TODO(MGP): Talk about logging in the near future!
 			throw new ServletException(String.format("Problem reading file '%s'", fileName), e);
 		}
-
 	}
 
 	/**
@@ -73,7 +70,8 @@ public class GuestBook extends HttpServlet {
 				entriesHtml.append(String.format("<li>%s</li>\n", entry));
 			}
 		}
-		response.getWriter().append("Served at: ").append(request.getContextPath()).append(entriesHtml.toString());
+		response.getWriter().append("Served at: ").append(request.getContextPath())
+		  .append(entriesHtml.toString());
 	}
 
 	/**
